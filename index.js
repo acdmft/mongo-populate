@@ -24,12 +24,14 @@ app.get("/", (_req, res) => {
 });
 
 // POST ADDRESS 
-app.post("/address", async (req, res) => {
-  let address;
-  try {
-    address = await Address.create(req.body.address);
-  } catch (err) {
-    return res.json({message: err});
+app.post("/student", async (req, res) => {
+  let address = await Address.findOne({$and: [{"streetName": req.body.address.streetName}, {"streetNumber": req.body.address.streetNumber}, {"city": req.body.address.city}] });
+  if (!address) {
+    try {
+      address = await Address.create(req.body.address);
+    } catch (err) {
+      return res.json({message: err});
+    }
   }
   try {
     const student = new Student({
