@@ -47,5 +47,13 @@ app.post("/student", async (req, res) => {
   return res.json({message: "Student created"});
 });
 
+// GET STUDENT AND HIS ADDRESS 
+app.get("/student/:id", async (req, res) => {
+  const student = await Student.findById(req.params.id).populate("address");
+  if (!student) {
+    return res.json({message: `user with id ${req.params.id}`});
+  }
+  res.json({message: student});
+});
 
 app.listen(8001, () => console.log("Listen port 8001..."));
