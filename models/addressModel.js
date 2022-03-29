@@ -1,4 +1,4 @@
-const mongoose = require("mogoose");
+const mongoose = require("mongoose");
 
 const addressSchema = new mongoose.Schema({
   streetName: {
